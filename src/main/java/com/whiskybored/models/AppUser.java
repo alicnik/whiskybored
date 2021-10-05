@@ -7,6 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
@@ -48,8 +49,11 @@ public class AppUser {
     @JsonProperty(access = WRITE_ONLY)
     private String password;
 
+    @Transient
+    @JsonProperty(access = WRITE_ONLY)
+    private String passwordConfirmation;
+
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Whisky> whiskies;
 }
