@@ -303,7 +303,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmY1ODFkY
     "id": "2c90cdc67c51cf5f017c51cf75c50001",
     "name": "Dalmore 15 y.o.",
     "origin": "Scotland",
-    "image": "{BASEURL}/images/dalmore.jpg",
+    "image": "{BASE_URI}/images/dalmore.jpg",
     "tastingNotes": "Soft and very approachable, with dried fruit, hazelnuts and dry spiciness. Rich, classic Christmas-cake notes of raisins, currants, cherries, cinnamon and nutmeg. Sweet and raisiny, this rich-tasting dram lingers for a long time.",
     "user": {
       "id": "2c9157327c55cc65017c55cc8ae40000",
@@ -315,7 +315,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmY1ODFkY
     "id": "2c90cdc67c51cf5f017c51cf75c50002",
     "name": "Bunnahabhain 12 y.o.",
     "origin": "Scotland",
-    "image": "{BASEURL}/images/bunnahabhain.jpg",
+    "image": "{BASE_URI}/images/bunnahabhain.jpg",
     "tastingNotes": "A rich and fruity Islay single malt from Bunnahabhain, matured for 12 years in ex-sherry casks, creating aromas of dried fruit, sweet flowers, oak spice and rich smoke on the nose. The palate offers notes of roast hazelnuts, vanilla, caramel, raisins and dates that linger in the finish.",
     "user": {
       "id": "2c9157327c55cc65017c55cc8ae40000",
@@ -473,7 +473,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmY1ODFkY
     "id": "2c90cdc67c51cf5f017c51cf75c50001",
     "name": "Dalmore 15 y.o.",
     "origin": "Scotland",
-    "image": "{BASEURL}/images/dalmore.jpg",
+    "image": "{BASE_URI}/images/dalmore.jpg",
     "tastingNotes": "Soft and very approachable, with dried fruit, hazelnuts and dry spiciness. Rich, classic Christmas-cake notes of raisins, currants, cherries, cinnamon and nutmeg. Sweet and raisiny, this rich-tasting dram lingers for a long time.",
   "user": {
     "id": "2c9157327c55cc65017c55cc8ae40000",
@@ -630,6 +630,71 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmY1ODFkY
                 </div>
             </div>
         </div>
+
+    <div class="panel">
+        <p class="panel-heading">/users/:username</p>
+        <div class="panel-block">
+            <div class="container">
+                <div class="columns is-mobile">
+                    <div class="column is-half">
+                        <div class="tags has-addons">
+                            <span class="tag is-primary">GET</span>
+                            <span class="tag"><code>/users/:username</code></span>
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <div class="icon is-pulled-right">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </div>
+                        <span class="tag is-pulled-right">SHOW ROUTE</span>
+                    </div>
+                </div>
+
+                <div class="messages">
+                    <div class="message is-small">
+                        <div class="message-header">Example request</div>
+                        <div class="message-body">
+                            <code
+                            >GET
+                                {BASE_URI}/users/mickyginger</code
+                            >
+                        </div>
+                    </div>
+
+                    <div class="message is-small">
+                        <div class="message-header">Example response</div>
+                        <div class="message-body">
+                                <pre>
+200 OK
+{
+    "id": "2c9157327c55cc65017c55cc8ae40000",
+    "username": "mickyginger",
+    "email": "mike.hayden@ga.co",
+    "whiskies": [
+        {
+            "id": "2c90cdc67c51cf5f017c51cf75c50001",
+            "name": "Dalmore 15 y.o.",
+            "origin": "Scotland",
+            "image": "{BASE_URI}/images/dalmore.jpg",
+            "tastingNotes": "Soft and very approachable, with dried fruit, hazelnuts and dry spiciness. Rich, classic Christmas-cake notes of raisins, currants, cherries, cinnamon and nutmeg. Sweet and raisiny, this rich-tasting dram lingers for a long time."
+        },
+        {
+            "id": "2c90cdc67c51cf5f017c51cf75c50002",
+            "name": "Bunnahabhain 12 y.o.",
+            "origin": "Scotland",
+            "image": "{BASE_URI}/images/bunnahabhain.jpg",
+            "tastingNotes": "A rich and fruity Islay single malt from Bunnahabhain, matured for 12 years in ex-sherry casks, creating aromas of dried fruit, sweet flowers, oak spice and rich smoke on the nose. The palate offers notes of roast hazelnuts, vanilla, caramel, raisins and dates that linger in the finish."
+        },
+        ...
+    ]
+}
+                                </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </main>
 <footer class="footer has-background-dark has-text-light">
