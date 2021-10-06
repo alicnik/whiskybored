@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8"/>
+    <title>WhiskyBored API</title>
+    <script
+            defer
+            src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
+    />
+    <style>
+      .panel-block .container {
+        width: 100%;
+      }
+      .tags,
+      .tag,
+      .columns {
+        margin-bottom: 0 !important;
+      }
+      .panel-block .columns {
+        margin-bottom: -0.75rem !important;
+      }
+      .content blockquote {
+        background-color: hsl(0, 0%, 98%);
+      }
+      div.message:first-of-type {
+        margin-top: 0.75rem;
+      }
+
+    </style>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var blocks = document.querySelectorAll("pre, code")
+        blocks.forEach(function (block) {
+          block.textContent = block.textContent.replace(
+            "{BASE_URI}",
+            window.origin
+          )
+        })
+
+        var messages = document.querySelectorAll(".messages")
+        messages.forEach(function (message) {
+          message.classList.add("is-hidden")
+        })
+
+        var blocks = document.querySelectorAll(
+          ".panel-block .container .columns"
+        )
+        blocks.forEach(function (block) {
+          block.addEventListener("click", function () {
+            var messages = this.parentNode.querySelector(".messages")
+            var icon = this.querySelector(".icon")
+
+            messages.classList.toggle("is-hidden")
+            icon.style.transform =
+              icon.style.transform === "rotate(180deg)"
+                ? "rotate(0)"
+                : "rotate(180deg)"
+          })
+        })
+      })
+
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+</head>
+<body>
+<main class="section">
+    <div class="container">
+        <h1 class="title is-1">WhiskyBored API</h1>
+
+        <p>A RESTful CRUD API for educational purposes</p>
+
+        <hr/>
+
+        <h2 class="title is-3">Endpoints</h2>
+        <h3 class="subtitle is-6"><em>* Requires authorization</em></h3>
+
+        <div class="content">
+            <blockquote>
+                <p>
+                    To authorize access to specific endpoints, set the
+                    <code>Authorization</code> header of your request to be
+                    <code>Bearer</code> followed by the token you received at login
+                </p>
+                <pre>
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmY1ODFkYTNkMWM2MjQyM2IxMmZjYjYiLCJpYXQiOjE1NDI4MTYyNzYsImV4cCI6MTU0MjgzNzg3Nn0.hAOyxDk9puDhMJ6nOowdfa8vpfYIp1wX8kzEOJoZ-3Y</pre
+                >
+            </blockquote>
+        </div>
+
+        <div class="panel">
+            <p class="panel-heading">/register</p>
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-info">POST</span>
+                                <span class="tag"><code>/register</code></span>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code>POST {BASE_URI}/register</code>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Parameters</div>
+                            <div class="message-body">
+                                <table class="table is-fullwidth">
+                                    <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Data type</th>
+                                        <th>Additional info</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><code>username</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>email</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>password</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>passwordConfirmation</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example payload</div>
+                            <div class="message-body">
+                    <pre>
+{
+  "username": "mickyginger",
+  "email": "mike.hayden@ga.co",
+  "password": "pass",
+  "passwordConfirmation": "pass"
+}</pre
+                    >
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>
+200 OK
+{
+  "message": "Registration successful"
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <p class="panel-heading">/login</p>
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-info">POST</span>
+                                <span class="tag"><code>/login</code></span>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code>POST {BASE_URI}/login</code>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Parameters</div>
+                            <div class="message-body">
+                                <table class="table is-fullwidth">
+                                    <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Data type</th>
+                                        <th>Additional info</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><code>email</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>password</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example payload</div>
+                            <div class="message-body">
+                                <pre>
+{
+  "email": "mike.hayden@ga.co",
+  "password": "pass"
+}
+                                </pre>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>
+200 OK
+{
+  "message": "Welcome back mickyginger!",
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YmY1ODFkYTNkMWM2MjQyM2IxMmZjYjYiLCJpYXQiOjE1NDI4MTYyNzYsImV4cCI6MTU0MjgzNzg3Nn0.hAOyxDk9puDhMJ6nOowdfa8vpfYIp1wX8kzEOJoZ-3Y"
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <p class="panel-heading">/whiskies</p>
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-primary">GET</span>
+                                <span class="tag"><code>/whiskies</code></span>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                            <span class="tag is-pulled-right">INDEX ROUTE</span>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code>GET {BASE_URI}/whiskies</code>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>
+200 OK
+[
+  {
+    "id": "2c90cdc67c51cf5f017c51cf75c50001",
+    "name": "Dalmore 15 y.o.",
+    "origin": "Scotland",
+    "image": "https://m.media-amazon.com/images/I/41y9+wmK2bL._AC_.jpg",
+    "tastingNotes": "Soft and very approachable, with dried fruit, hazelnuts and dry spiciness. Rich, classic Christmas-cake notes of raisins, currants, cherries, cinnamon and nutmeg. Sweet and raisiny, this rich-tasting dram lingers for a long time.",
+    "user": {
+      "id": "5bf6c0f57288d357a9110cdd",
+      "username": "mickyginger",
+      "email": "mike.hayden@ga.co"
+    }
+  },
+  {
+    "id": "2c90cdc67c51cf5f017c51cf75c50002",
+    "name": "Bunnahabhain 12 y.o.",
+    "origin": "Scotland",
+    "image": "https://img.thewhiskyexchange.com/900/bunob.12yov17.jpg",
+    "tastingNotes": "A rich and fruity Islay single malt from Bunnahabhain, matured for 12 years in ex-sherry casks, creating aromas of dried fruit, sweet flowers, oak spice and rich smoke on the nose. The palate offers notes of roast hazelnuts, vanilla, caramel, raisins and dates that linger in the finish.",
+    "user": {
+      "id": "5bf6c0f57288d357a9110cdd",
+      "username": "mickyginger",
+      "email": "mike.hayden@ga.co"
+    }
+  },
+  ...
+]
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-info">POST</span>
+                                <span class="tag"><code>/whiskies</code></span>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                            <span class="tag is-pulled-right">CREATE ROUTE</span>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code>POST {BASE_URI}/whiskies</code>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Parameters</div>
+                            <div class="message-body">
+                                <table class="table is-fullwidth">
+                                    <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Data type</th>
+                                        <th>Additional info</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><code>name</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>origin</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>image</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>tastingNotes</code></td>
+                                        <td>String</td>
+                                        <td>Max 380 characters</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example payload</div>
+                            <div class="message-body">
+                                <pre>
+{
+"name": "Dalwhinnie 15 Year Old",
+"origin": "Scotland",
+"image": "https://img.thewhiskyexchange.com/900/dalob.15yov5.jpg",
+"tastingNotes": "Dalwhinnie 15yo is a good introduction to the delights of single malt whisky - elegant, smooth and medium-bodied with a light, fruity palate and a whiff of heather on the finish."
+}
+                                </pre>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>
+201 Created
+{
+  "id": "402881517c50ebed017c50ed587f0004",
+  "name": "Dalwhinnie 15 Year Old",
+  "origin": "Scotland",
+  "image": "https://img.thewhiskyexchange.com/900/dalob.15yov5.jpg",
+  "tastingNotes": "Dalwhinnie 15yo is a good introduction to the delights of single malt whisky - elegant, smooth and medium-bodied with a light, fruity palate and a whiff of heather on the finish.",
+  "user": {
+    "id": "5bf6c0f57288d357a9110cdd",
+    "username": "mickyginger",
+    "email": "mike.hayden@ga.co"
+  }
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel">
+            <p class="panel-heading">/whiskies/:id</p>
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-primary">GET</span>
+                                <span class="tag"><code>/whiskies/:id</code></span>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                            <span class="tag is-pulled-right">SHOW ROUTE</span>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code
+                                >GET
+                                    {BASE_URI}/whiskies/2c90cdc67c51cf5f017c51cf75c50001</code
+                                >
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>
+200 OK
+{
+    "id": "2c90cdc67c51cf5f017c51cf75c50001",
+    "name": "Dalmore 15 y.o.",
+    "origin": "Scotland",
+    "image": "https://m.media-amazon.com/images/I/41y9+wmK2bL._AC_.jpg",
+    "tastingNotes": "Soft and very approachable, with dried fruit, hazelnuts and dry spiciness. Rich, classic Christmas-cake notes of raisins, currants, cherries, cinnamon and nutmeg. Sweet and raisiny, this rich-tasting dram lingers for a long time.",
+  "user": {
+    "id": "5bf6c0f57288d357a9110cdd",
+    "username": "mickyginger",
+    "email": "mike.hayden@ga.co"
+  }
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-warning">PUT</span>
+                                <span class="tag"><code>/whiskies/:id</code></span>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                            <span class="tag is-pulled-right">UPDATE ROUTE</span>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code
+                                >PUT
+                                    {BASE_URI}/whiskies/2c90cdc67c51cf5f017c51cf75c50001</code
+                                >
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Parameters</div>
+                            <div class="message-body">
+                                <table class="table is-fullwidth">
+                                    <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>Data type</th>
+                                        <th>Additional info</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><code>name</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>origin</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>image</code></td>
+                                        <td>String</td>
+                                        <td>Required</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>tastingNotes</code></td>
+                                        <td>String</td>
+                                        <td>Max 380 characters</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example payload</div>
+                            <div class="message-body">
+                                <pre>
+                                {
+                                  "name": "Bunnahabhain 12 y.o.",
+                                  "origin": "Scotland",
+                                  "image": "{BASE_URI}/images/bunnahabhain.jpeg",
+                                  "tastingNotes": "Modified tasting notes"
+                                }
+                                </pre>
+                            </div>
+                        </div>
+
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>
+200 OK
+{
+  "id": "5bf69d5b115e7252c5e6b911",
+  "name": "Bunnahabhain 12 y.o.",
+  "origin": "Scotland",
+  "image": "{BASE_URI}/images/bunnahabhain.jpeg",
+  "tastingNotes": "Modified tasting notes",
+  "user": {
+    "id": "5bf6c0f57288d357a9110cdd",
+    "username": "mickyginger",
+    "email": "mike.hayden@ga.co"
+  }
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column is-half">
+                            <div class="tags has-addons">
+                                <span class="tag is-danger">DELETE</span>
+                                <span class="tag"><code>/whiskies/:id</code></span>
+                                <em>*</em>
+                            </div>
+                        </div>
+                        <div class="column is-half">
+                            <div class="icon is-pulled-right">
+                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                            </div>
+                            <span class="tag is-pulled-right">DELETE ROUTE</span>
+                        </div>
+                    </div>
+
+                    <div class="messages">
+                        <div class="message is-small">
+                            <div class="message-header">Example request</div>
+                            <div class="message-body">
+                                <code
+                                >DELETE
+                                    {BASE_URI}/whiskies/2c90cdc67c51cf5f017c51cf75c50001</code
+                                >
+                            </div>
+                        </div>
+                        <div class="message is-small">
+                            <div class="message-header">Example response</div>
+                            <div class="message-body">
+                                <pre>204 No Content</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer class="footer has-background-dark has-text-light">
+    <div class="content has-text-centered">
+        Made with <i class="fas fa-heart"></i> at GA London
+    </div>
+</footer>
+</body>
+</html>

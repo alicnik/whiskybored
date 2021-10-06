@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WhiskyRepository extends JpaRepository<Whisky, String> {
+
+    Whisky deleteByName(String name);
 }

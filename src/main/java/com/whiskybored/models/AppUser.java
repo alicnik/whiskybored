@@ -55,5 +55,6 @@ public class AppUser {
 
     @Column
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("user")
     private List<Whisky> whiskies;
 }
