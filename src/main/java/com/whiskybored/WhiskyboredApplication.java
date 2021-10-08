@@ -51,7 +51,7 @@ public class WhiskyboredApplication {
             Whisky dalmore = Whisky.builder()
                     .name("Dalmore 15 y.o.")
                     .origin("Scotland")
-                    .image(env.getProperty("BASE_URL") + "static/images/dalmore.jpg")
+                    .image(env.getProperty("BASE_URL") + "/images/dalmore.jpg")
                     .tastingNotes("Soft and very approachable, with dried fruit, hazelnuts and dry spiciness. Rich, classic Christmas-cake notes of raisins, currants, cherries, cinnamon and nutmeg. Sweet and raisiny, this rich-tasting dram lingers for a long time.")
                     .user(admin)
                     .build();

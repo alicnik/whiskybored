@@ -51,6 +51,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
 
+        httpSecurity.authorizeRequests().antMatchers("/images/**").permitAll();
         httpSecurity.authorizeRequests().antMatchers("/login").permitAll();
         httpSecurity.authorizeRequests().antMatchers("/register").permitAll();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies").permitAll();
