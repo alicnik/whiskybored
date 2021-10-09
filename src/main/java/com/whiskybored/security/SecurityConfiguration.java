@@ -51,12 +51,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
 
-        httpSecurity.authorizeRequests().antMatchers("/images/**").permitAll();
         httpSecurity.authorizeRequests().antMatchers("/login").permitAll();
         httpSecurity.authorizeRequests().antMatchers("/register").permitAll();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies").permitAll();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies/{[0-9a-f]{32}}").permitAll();
-        httpSecurity.authorizeRequests().anyRequest().permitAll();
+        httpSecurity.authorizeRequests().anyRequest().authenticated();
 
         CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
         authenticationFilter.setRequiresAuthenticationRequestMatcher(requestMatcher);
