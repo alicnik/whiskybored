@@ -56,7 +56,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         httpSecurity.authorizeRequests().antMatchers("/register").permitAll();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies").permitAll();
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies/{[0-9a-f]{32}}").permitAll();
-        httpSecurity.authorizeRequests().anyRequest().authenticated();
+        httpSecurity.authorizeRequests().anyRequest().permitAll();
 
         CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
         authenticationFilter.setRequiresAuthenticationRequestMatcher(requestMatcher);

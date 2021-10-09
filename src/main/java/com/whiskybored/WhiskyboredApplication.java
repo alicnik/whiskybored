@@ -56,7 +56,6 @@ public class WhiskyboredApplication {
                     .user(admin)
                     .build();
 
-
             Whisky bunnahabhain = Whisky.builder()
                     .name("Bunnahabhain 12 y.o.")
                     .origin("Scotland")
