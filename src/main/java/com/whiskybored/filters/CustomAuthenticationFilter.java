@@ -38,6 +38,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         Map<String, String> requestBody = new ObjectMapper().readValue(request.getInputStream(), Map.class);
         String username = requestBody.get("username");
         String password = requestBody.get("password");
