@@ -2,6 +2,7 @@ package com.whiskybored.filters;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.whiskybored.models.AppUser;
 import lombok.SneakyThrows;
@@ -38,8 +39,8 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        Map<String, String> requestBody = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+        TypeReference<Map<String, String>> typeReference = new TypeReference<>() {};
+        Map<String, String> requestBody = new ObjectMapper().readValue(request.getInputStream(), typeReference);
         String username = requestBody.get("username");
         String password = requestBody.get("password");
         log.info("Username is: {}", username);
