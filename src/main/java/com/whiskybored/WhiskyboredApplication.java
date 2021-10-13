@@ -72,6 +72,14 @@ public class WhiskyboredApplication {
                     .user(admin)
                     .build();
 
+            Whisky caolIla = Whisky.builder()
+                    .name("Caol Ila 12 Year Old")
+                    .origin("Scotland")
+                    .image(env.getProperty("BASE_URL") + "/images/caol-ila.jpg")
+                    .tastingNotes("Caol Ila 12 Year Old is of medium weight, but still packing plenty of potent phenols, this is a refined, powerful dram with a compensating oiliness. A balanced, peaty beauty.")
+                    .user(admin)
+                    .build();
+
             appUserRepository.save(admin);
             whiskyRepository.saveAll(List.of(dalmore, bunnahabhain, yamazaki));
 

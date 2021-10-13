@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,7 +26,7 @@ public class AppUserController {
     }
 
     @GetMapping("/users/{username}")
-    public AppUser getSingleUser(Principal principal, @PathVariable String username) {
+    public AppUser getSingleUser(Principal principal, @PathVariable String username) throws UsernameNotFoundException {
         AppUser appUser = appUserService.getUserByUsername(principal.getName());
         if (!username.equals(appUser.getUsername())) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "You can't get another user's details");
