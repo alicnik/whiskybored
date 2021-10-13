@@ -13,7 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.security.Principal;
 
-@CrossOrigin
 @RestController
 @Slf4j
 public class AppUserController {

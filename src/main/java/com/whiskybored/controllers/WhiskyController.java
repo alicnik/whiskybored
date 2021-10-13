@@ -14,7 +14,6 @@ import java.net.URI;
 import java.security.Principal;
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/whiskies")
 public class WhiskyController {
