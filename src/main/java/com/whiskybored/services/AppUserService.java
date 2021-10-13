@@ -61,10 +61,7 @@ public class AppUserService implements UserDetailsService {
         System.out.println("PRINTING THE USERNAME: " + username);
         Optional<AppUser> appUser = appUserRepository.findByUsername(username);
         if (appUser.isEmpty()) {
-            log.error("User not found");
             throw new UsernameNotFoundException("User not found");
-        } else {
-            log.info("User found: {}", username);
         }
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
         return new User(appUser.get().getUsername(), appUser.get().getPassword(), authorities);

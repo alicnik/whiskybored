@@ -27,7 +27,7 @@ public class WhiskyService {
         return whiskyRepository.findAll();
     }
 
-    public Whisky getSingleWhisky(String cardId) {
+    public Whisky getSingleWhisky(String cardId) throws ResponseStatusException {
         Optional<Whisky> foundCard = whiskyRepository.findById(cardId);
         if (foundCard.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Card not found");
@@ -46,7 +46,7 @@ public class WhiskyService {
         return whiskyRepository.save(whisky);
     }
 
-    public Whisky updateWhisky(Whisky updatedWhisky, AppUser appUser) {
+    public Whisky updateWhisky(Whisky updatedWhisky, AppUser appUser) throws ResponseStatusException {
         Optional<Whisky> existingWhisky = whiskyRepository.findById(updatedWhisky.getId());
         if (existingWhisky.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Whisky not found");
@@ -58,7 +58,7 @@ public class WhiskyService {
         return whiskyRepository.save(updatedWhisky);
     }
 
-    public void deleteWhisky(String whiskyId, AppUser appUser) {
+    public void deleteWhisky(String whiskyId, AppUser appUser) throws ResponseStatusException {
         Optional<Whisky> existingWhisky = whiskyRepository.findById(whiskyId);
         if (existingWhisky.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Whisky not found");
