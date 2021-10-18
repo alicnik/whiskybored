@@ -22,8 +22,12 @@ import java.util.Map;
 @RestControllerAdvice
 public class RestResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private final DefaultErrorAttributes defaultErrorAttributes;
+
     @Autowired
-    private DefaultErrorAttributes defaultErrorAttributes;
+    public RestResponseExceptionHandler(DefaultErrorAttributes defaultErrorAttributes) {
+        this.defaultErrorAttributes = defaultErrorAttributes;
+    }
 
     @ExceptionHandler(UsernameNotFoundException.class)
     public final ResponseEntity<Object> handleUsernameNotFoundException(
