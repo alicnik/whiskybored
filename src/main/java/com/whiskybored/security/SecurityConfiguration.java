@@ -51,24 +51,24 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors();
-        httpSecurity.csrf().disable();
-        httpSecurity.sessionManagement().sessionCreationPolicy(STATELESS);
+    protected void configure(HttpSecurity http) throws Exception {
+        http.cors();
+        http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(STATELESS);
 
         AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
 
-        httpSecurity.authorizeRequests().antMatchers("/login").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/register").permitAll();
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies").permitAll();
-        httpSecurity.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies/{[0-9a-f]{32}}").permitAll();
-        httpSecurity.authorizeRequests().anyRequest().authenticated();
+        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/register").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies").permitAll();
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies/{[0-9a-f]{32}}").permitAll();
+        http.authorizeRequests().anyRequest().authenticated();
 
         CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
         authenticationFilter.setRequiresAuthenticationRequestMatcher(requestMatcher);
 
-        httpSecurity.addFilter(authenticationFilter);
-        httpSecurity.addFilterBefore(new CustomAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(authenticationFilter);
+        http.addFilterBefore(new CustomAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
