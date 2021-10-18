@@ -52,7 +52,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().and().csrf().disable();
+        httpSecurity.cors();
+        httpSecurity.csrf().disable();
         httpSecurity.sessionManagement().sessionCreationPolicy(STATELESS);
 
         AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
