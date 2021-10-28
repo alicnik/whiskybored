@@ -89,7 +89,7 @@ public class WhiskyIT {
     @Test
     public void getAllStation() throws Exception {
         RequestBuilder request = MockMvcRequestBuilders.get("/whiskies");
-        System.out.println("testing whiskies getAll");
+        System.out.println("testing whiskies getAll removing github project");
         mockMvc.perform(request).andExpect(status().isOk());
     }
 }
