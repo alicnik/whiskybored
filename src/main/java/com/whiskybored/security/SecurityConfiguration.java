@@ -3,6 +3,7 @@ package com.whiskybored.security;
 import com.whiskybored.filters.CustomAuthenticationFilter;
 import com.whiskybored.filters.CustomAuthorisationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -28,6 +29,9 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Value("${jwt.secret}")
+    private String secret;
 
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -56,7 +60,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
 
-        AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
 
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/register").permitAll();
@@ -64,7 +67,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/whiskies/{[0-9a-f]{32}}").permitAll();
         http.authorizeRequests().anyRequest().authenticated();
 
-        CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
+        CustomAuthenticationFilter authenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean(), secret);
+
+        AntPathRequestMatcher requestMatcher = new AntPathRequestMatcher("/login", "POST");
         authenticationFilter.setRequiresAuthenticationRequestMatcher(requestMatcher);
 
         http.addFilter(authenticationFilter);

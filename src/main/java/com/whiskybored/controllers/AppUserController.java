@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.security.Principal;
+import java.util.regex.Pattern;
 
 @RestController
 @Slf4j
@@ -35,7 +37,7 @@ public class AppUserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody AppUser appUser) throws ResponseStatusException {
+    public ResponseEntity<String> register(@RequestBody @Valid AppUser appUser) throws ResponseStatusException {
         if (!appUser.getPassword().equals(appUser.getPasswordConfirmation())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "password does not match password confirmation");
         }

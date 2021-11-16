@@ -5,6 +5,7 @@ import com.whiskybored.models.Whisky;
 import com.whiskybored.repositories.AppUserRepository;
 import com.whiskybored.repositories.WhiskyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +28,8 @@ public class WhiskyboredApplication {
     public static void main(String[] args) {
         SpringApplication.run(WhiskyboredApplication.class, args);
     }
-
+    @Value("${jwt.secret}")
+    private String secret;
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();

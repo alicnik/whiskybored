@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.List;
 
@@ -47,6 +49,7 @@ public class AppUser {
 
     @Column(nullable = false)
     @JsonProperty(access = WRITE_ONLY)
+    @Pattern(regexp = "[a-z]+")
     private String password;
 
     @Transient
