@@ -85,7 +85,7 @@ public class WhiskyboredApplication {
                     .build();
 
             appUserRepository.save(admin);
-            whiskyRepository.saveAll(List.of(dalmore, bunnahabhain, yamazaki));
+            whiskyRepository.saveAll(List.of(dalmore, bunnahabhain, yamazaki, caolIla));
 
         };
     }

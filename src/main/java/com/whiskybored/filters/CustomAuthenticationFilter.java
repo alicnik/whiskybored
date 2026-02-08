@@ -2,24 +2,21 @@ package com.whiskybored.filters;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.whiskybored.models.AppUser;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
-import javax.servlet.FilterChain;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import tools.jackson.databind.json.JsonMapper;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -38,10 +35,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     @SneakyThrows
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        TypeReference<Map<String, String>> typeReference = new TypeReference<>() {};
-        Map<String, String> requestBody = new ObjectMapper().readValue(request.getInputStream(), typeReference);
-        String username = requestBody.get("username");
-        String password = requestBody.get("password");
+        LoginRequest requestBody = JsonMapper.builder().build().readValue(request.getInputStream(), LoginRequest.class);
+        String username = requestBody.username();
+        String password = requestBody.password();
         log.info("Username is: {}", username);
         log.info("Password is: {}", password);
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
@@ -65,6 +61,6 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         tokens.put("message", "Welcome back, " + user.getUsername());
         tokens.put("access_token", accessToken);
         response.setContentType(APPLICATION_JSON_VALUE);
-        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
+        JsonMapper.builder().build().writeValue(response.getOutputStream(), tokens);
     }
 }
