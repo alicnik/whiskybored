@@ -2,9 +2,9 @@ package com.whiskybored.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @Table(name = "whiskies")
@@ -16,8 +16,7 @@ import jakarta.persistence.*;
 public class Whisky {
 
     @Id
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDHexGenerator")
-    @GeneratedValue(generator = "UUID")
+    @UuidGenerator
     @Column(name = "id", updatable = false, nullable = false)
     private String id;
 

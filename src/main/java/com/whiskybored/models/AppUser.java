@@ -3,10 +3,11 @@ package com.whiskybored.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
+import org.hibernate.annotations.UuidGenerator;
+
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
@@ -33,8 +34,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.Access.WRITE_ONLY;
 public class AppUser {
 
     @Id
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDHexGenerator")
-    @GeneratedValue(generator = "UUID")
+    @UuidGenerator
     @Column(name = "id", updatable = false, nullable = false)
     private String id;
 
